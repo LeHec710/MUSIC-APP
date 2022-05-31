@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paramètres{% endblock %}
+
+{% block body %}
+<div class="container center">
+    <h1 class="color-pink">Paramètres</h1>
+    <section class="parameter">
+        <h2>Compte</h2>
+            <ul>
+                <li>
+                    <a href="{{ path('app_user_show', {'id': user.id }) }}">Mon compte</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </li>
+            </ul>
+        {% if 'ROLE_ADMIN' in user.roles %}
+        <h2>ADMINISTRATION</h2>
+            <ul>
+                <li>
+                    <a href="{{ path('app_user_index') }}">Comptes</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_playlist_index') }}">Playlists</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_artist_index') }}">Artistes</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_song_index') }}">Musiques</a>
+                </li>
+            </ul>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

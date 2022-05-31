@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+<div class="container center">
+        <h1 class="homepage color-pink">
+            <span class="material-icons" style="font-size: 2em">local_fire_department</span>
+            MUSIC4LIFE
+        </h1>
+    {{ form_start(registrationForm) }}
+        <h1>Créer un compte</h1>
+        <p class="error subtitle" style="margin-bottom: 2em;">
+            {{ form_errors(registrationForm) }}
+        </p>
+        
+        <p class="subtitle">Vous possédez déjà un compte ? <a class="color-pink" href="{{ path('homepage') }}">Se connecter</a></p>
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+
+        <button type="submit">S'enregistrer</button>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

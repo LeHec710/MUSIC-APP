@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes coups de coeur{% endblock %}
+
+{% block body %}
+    <div class="playlist">
+    <h1>Mes coups de coeurs</h1>
+        <table class="songs">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Artiste
+                </th>
+                <th>
+                    Album
+                </th>
+                <th>
+                    Titre
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in tracks %}
+            <tr>
+                <td>
+                    {{ loop.index }}
+                </td>
+                <td>
+                    <a href="{{ path('app_artist_show', {'id': song.playlist[0].artist.id }) }}">
+                        <img src="{{ asset('artists/' ~ song.playlist[0].artist.name ~ '/' ~ song.playlist[0].artist.image) }}">
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('app_playlist_show', {'id': song.playlist[0].id }) }}">
+                        <img src="{{ asset('albums/' ~ song.playlist[0].title ~ '/' ~ song.playlist[0].image) }}">
+                    </a>
+                </td>
+                <td>
+                    {{ song.title }}
+                </td>
+                <td>
+                    <a>
+                        <span class="material-icons">play_arrow</span>
+                    </a>
+                    {# ROUTE NO EXIST (VUE PART) #}
+                    {# <a href="{{ path('remove_loved_track', {'id': song.id}) }}"> #}
+                        <span class="material-icons selected">local_fire_department</span>
+                    {# </a> #}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+{% endblock %}

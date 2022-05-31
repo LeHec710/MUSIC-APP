@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des albums{% endblock %}
+
+{% block body %}
+<div class="container crud-container center" style="justify-content: flex-start">
+    <h1>Gestion des albums</h1>
+    <table class="crud">
+        <thead>
+            <tr>
+                <th>Artiste</th>
+                <th>Album</th>
+                <th>Date de sortie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for playlist in playlists %}
+            <tr>
+                <td>
+                    <a href="{{ path('app_artist_show', {'id': playlist.artist.id}) }}">
+                        {{ playlist.artist.name }}<br>
+                        <img src="{{ asset('artists/' ~ playlist.artist.name ~ '/' ~ playlist.artist.image)}}">
+                    </a>
+                <td>
+                    <a href="{{ path('app_playlist_show', {'id': playlist.id}) }}">
+                        {{ playlist.title }}<br>
+                        <img src="{{ asset('albums/' ~ playlist.title ~ '/' ~ playlist.image)}}">
+                    </a>
+                </td>
+                <td>
+                    {{ playlist.date|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+                </td>
+                <td>
+                    <button class="small">
+                        <a href="{{ path('app_playlist_edit', {'id': playlist.id}) }}">Modifier</a>
+                    </button>
+                    <button class="small">
+                        <a href="{{ path('app_playlist_delete', {'id': playlist.id}) }}">Supprimer</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas d'albums trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit">
+        <a href="{{ path('app_playlist_new') }}">Ajouter un album</a>
+    </button>
+</div>
+{% endblock %}

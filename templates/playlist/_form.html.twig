@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    <label for="image">Titre:</label><br>
+    {{ form_widget(form.title) }}
+    <label for="image">Image:</label><br>
+    {{ form_widget(form.image) }}<br><br>
+    <label for="image">Artiste:</label><br>
+    {{ form_widget(form.artist) }}
+    <label for="image">Date de sortie:</label><br>
+    {{ form_widget(form.date) }}
+    <button class="" type="submit">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

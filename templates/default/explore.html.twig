@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Explorer{% endblock %}
+{# 
+    THIS PAGE IS HIDDEN BECAUSE IT IS ALREADY RENDERED IN VUE
+ #}
+{% block body %}
+    
+    <h1>Explorer</h1>
+    <section>
+        <h2>Top album</h2>
+        <div class="slider">
+            {% for playlist in playlists %}
+            <div class="cover-container">
+                <a href="{{ path('app_playlist_show', {'id': playlist.id}) }}">
+                    <img src="{{ asset('albums/' ~ playlist.title ~ '/' ~ playlist.image) }}" alt="">
+                    <p>{{playlist.title}}</p>
+                    <p class="caption"><a href="{{ path('app_artist_show', {'id': playlist.artist.id}) }}">{{playlist.artist.name}}</a></p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section>
+        <h2>Top Artistes</h2>
+        <div class="slider">
+            {% for artist in artists %}
+            <div class="cover-container">
+                <a href="{{ path('app_artist_show', {'id': artist.id}) }}">
+                    <img src="{{ asset('artists/' ~ artist.name ~ '/' ~ artist.image) }}" alt="">
+                    <p>{{artist.name}}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section> 
+   
+{% endblock %}

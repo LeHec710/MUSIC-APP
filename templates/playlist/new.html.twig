@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un album{% endblock %}
+
+{% block body %}
+    <div class="container center">
+    <h1>Ajouter un album</h1>
+
+    {{ include('playlist/_form.html.twig') }}
+
+    <p><a href="{{ path('app_playlist_index') }}">Retour</a></p>
+    </div>
+{% endblock %}

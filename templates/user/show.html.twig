@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil d'utilisateur{% endblock %}
+
+{% block body %}
+<div class="container center">
+    <h1>Profil de {{ user.email }}</h1>
+
+    <table class="crud user">
+        <tbody>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+        <br>
+        <p><a href="{{ path('app_user_index') }}">Liste des utilisateurs</a></p>
+    {% endif %}
+    <div>
+        {% if is_granted("ROLE_ADMIN") %}
+            {% if user.id != current_user.id %}
+                <button>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                </button>
+            {% endif %}
+            {{ include('user/_delete_form.html.twig') }}
+        {% endif %}
+
+        {% if user.id == current_user.id %}
+                <button>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                </button>
+            <button>
+                <a href="{{ path('app_logout') }}">Deconnexion</a>
+            </button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

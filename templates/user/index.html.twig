@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+<div class="container crud-container center">
+    <h1>Liste des utilisateurs</h1>
+    <table class="crud">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>
+                    <button class="small">
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}">Afficher</a>
+                    </button>
+                    <button class="small">
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun utilisateur trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button>
+        <a href="{{ path('app_register') }}">Ajouter un utilisateur</a>
+    </button>
+</div>
+{% endblock %}

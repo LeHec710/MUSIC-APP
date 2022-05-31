@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{artist.name}}{% endblock %}
+
+{% block body %}
+    <div class="playlist">
+        <div class="playlist-description">
+            <img src="{{ asset('artists/' ~ artist.name ~ '/' ~ artist.image) }}">
+            <div class="playlist-description-infos">
+                <a href="{{ path('app_artist_show', {'id': artist.id}) }}">
+                    <h1>{{ artist.name }}</h1>
+                </a>
+            </div>
+        </div>
+        <section>
+            <h2>Albums</h2>
+            <div class="slider">
+                {% for playlist in artist.albums %}
+                <div class="cover-container">
+                    <a href="{{ path('app_playlist_show', {'id': playlist.id}) }}">
+                        <img src="{{ asset('albums/' ~ playlist.title ~ '/' ~ playlist.image) }}" alt="">
+                        <p>{{playlist.title}}</p>
+                        <p class="caption">{{playlist.artist.name}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <br>
+        <table class="songs">
+        <h2>Titre</h2>
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Titre
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in artist.songs %}
+            <tr>
+                <td>
+                    {{ loop.index }}
+                </td>
+                <td>
+                    {{ song.title }}
+                </td>
+                <td>
+                    <a>
+                        <span class="material-icons">play_arrow</span>
+                    </a>
+                        {% if song in user.lovedSongs %}
+                        {# ROUTE NO EXIST (VUE PART) #}
+                            {# <a href="{{ path('remove_loved_track', {'id': song.id, 'path': app.request.uri}) }}"> #}
+                                <span class="material-icons selected">local_fire_department</span>
+                            {# </a> #}
+                        {% else %}
+                            {# <a href="{{ path('add_loved_track', {'id': song.id}) }}"> #}
+                                <span class="material-icons">local_fire_department</span>
+                            {# </a> #}
+                        {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les musiques{% endblock %}
+
+{% block body %}
+<div class="container crud-container center" style="justify-content: flex-start">
+    <h1>Toutes les musiques</h1>
+
+    <table class="crud">
+        <thead>
+            <tr>
+                <th>Artiste</th>
+                <th>Album</th>
+                <th>Title</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for song in songs %}
+            <tr>
+                <td>{{ song.playlist[0].artist.name }}</td>
+                <td>{{ song.playlist[0] }}</td>
+                <td>{{ song.title }}</td>
+                <td>
+                    {# <button class="small">
+                        <a href="{{ path('app_song_show', {'id': song.id}) }}">Afficher</a>
+                    </button> #}
+                    <button class="small">
+                        <a href="{{ path('app_song_edit', {'id': song.id}) }}">Modifier</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune musique trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button>
+        <a href="{{ path('app_song_new') }}">Ajouter une musique</a>
+    </button>
+</div>
+{% endblock %}

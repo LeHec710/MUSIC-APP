@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artist index{% endblock %}
+
+{% block body %}
+<div class="container crud-container center" style="justify-content: flex-start">
+    <h1>Liste des artistes</h1>
+
+    <table class="crud">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for artist in artists %}
+            <tr>
+                <td>
+                    <a href="{{ path('app_artist_show', {'id': artist.id}) }}">
+                        {{ artist.name }}<br>
+                        <img src="{{ asset('artists/' ~ artist.name ~ '/' ~ artist.image)}}">
+                    </a>
+                </td>
+                <td>{{ artist.name }}</td>
+                <td>
+                    <button class="small">
+                        <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a>
+                    </button>
+                    <button class="small">
+                        <a href="{{ path('app_artist_delete', {'id': artist.id}) }}">Supprimer</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit">
+        <a href="{{ path('app_artist_new') }}">Ajouter un artiste</a>
+    </button>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block body %}
+<div class="container center">
+    <form method="post">
+
+
+        <h1>Se connecter</h1>
+        {% if error %}
+            <p class="error subtitle" style="margin-bottom: 2em;">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+        {% endif %}
+        {% if app.user %}
+            <div class="error">
+                <p style="margin-bottom: 2em;">Vous êtes déjà connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a></p> 
+            </div>
+        {% endif %}
+        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet ex id diam congue, quis dapibus neque aliquet. Proin rutrum egestas nisi eget viverra. Donec lacinia diam id nisi vulputate.</p>
+        <label for="inputEmail">Adresse email:</label>
+        <input type="email" value="{{ last_username }}" placeholder="Adresse email" name="email" id="inputEmail" class="form-input" autocomplete="email" required autofocus>
+        <label for="inputPassword">Mot de passe:</label>
+        <input type="password" name="password" id="inputPassword" placeholder="Mot de passe" class="form-input" autocomplete="current-password" required>
+
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="_remember_me"> Se souvenir de moi ?
+            </label>
+        </div>
+
+        <button class="" type="submit">
+            Sign in
+        </button>
+    </form>
+</div>
+{% endblock %}

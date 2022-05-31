@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher{% endblock %}
+
+{% block body %}
+    <h1>Rechercher</h1>
+    {{ form_start(form,{'attr': {'class': 'search'}}) }}
+        {{ form_widget(form.search) }}
+        <input type="submit" class="material-icons search-icon" value="search">
+    {{ form_end(form) }}
+    <br><br><br>
+    <section>
+        <h2>Résultats:</h2><br>
+        <div class="slider">
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+
+            {% for result in results %}
+            <div class="cover-container">
+                <a href="{{ path('app_playlist_show', {'id': result.id}) }}">
+                    <img src="{{ asset('albums/' ~ result.title ~ '/' ~ result.image) }}" alt="">
+                    <p>{{result.artist.name}}</p>
+                    <p class="caption">{{result.title}}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

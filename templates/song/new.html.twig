@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une musique{% endblock %}
+
+{% block body %}
+<div class="container center">
+    <h1>Ajouter une musique</h1>
+
+    {{ include('song/_form.html.twig') }}
+
+    <p><a href="{{ path('app_song_index') }}">Retour</a></p>
+</div>
+{% endblock %}
