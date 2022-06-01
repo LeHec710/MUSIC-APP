@@ -1,4 +1,6 @@
 {
+    "name": "hector/musicapp",
+    "description": "a vue and symfony music player app made for school",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
